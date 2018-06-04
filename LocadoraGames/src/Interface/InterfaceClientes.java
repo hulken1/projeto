@@ -38,6 +38,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class InterfaceClientes extends JFrame {
 
@@ -67,11 +69,24 @@ public class InterfaceClientes extends JFrame {
 	 */
 	
 	public InterfaceClientes() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				if (e.getID() == WindowEvent.WINDOW_CLOSING){
+					int selectedOption = JOptionPane.showConfirmDialog(null,"Deseja Sair Realmente?", "Sistema informa:", JOptionPane.YES_NO_OPTION);
+	if(selectedOption == JOptionPane.YES_OPTION){
+		System.exit(0);  	                	
+	}	
+				}	
+			}
+		});
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 701, 485);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		this.setLocationRelativeTo(null);
 		contentPane.setLayout(null);
 	
 		JLabel lblImagemCliente = new JLabel("");
@@ -219,21 +234,23 @@ public class InterfaceClientes extends JFrame {
         barra.setBounds(5, 5, 675, 257);
         
         
-		JButton btnCadastro = new JButton("Cadastro");
+		JButton btnCadastro = new JButton("");
+		btnCadastro.setToolTipText("Cadastro");
 		btnCadastro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				Acoes a = new Acoes();
 
 		        String nomeCliente = txtNome.getText();
-		        String enderecoCliente = txtEndereco.getText();
 		        String cpfCliente = txtCPF.getText();
 		        String dataNascimento = txtDataNascimento.getText();
+		        String enderecoCliente = txtEndereco.getText();
+		        String nEndereco = txtnResidencia.getText();		        
 		        String cepCliente = txtCep.getText();
 		        String nResidencial = txtNumeroResidencial.getText();
 		        String nCelular = txtCelular.getText();
-		        String nEndereco = txtEndereco.getText();
-		        a.clientes(nomeCliente, enderecoCliente, cpfCliente, dataNascimento, cepCliente, nResidencial, nCelular, nEndereco);
+		       
+		       a.clientes(nomeCliente, cpfCliente, dataNascimento, enderecoCliente, nEndereco, cepCliente, nResidencial, nCelular);
 		        JOptionPane.showMessageDialog(null, "Cadastrado com Sucesso!");
 		        modelo.setModel(a.listarClientes());
 		        txtNome.setText("");
@@ -257,6 +274,18 @@ public class InterfaceClientes extends JFrame {
 		lblImagemDireita.setBounds(455, 0, 225, 262);
 		pnlCadastroCliente.add(lblImagemDireita);
 		
+		JButton btnVoltar = new JButton("");
+		btnVoltar.setToolTipText("Voltar");
+		btnVoltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new InterfacePrincipal().setVisible(true);
+				dispose();
+			}
+		});
+		btnVoltar.setIcon(new ImageIcon(InterfaceClientes.class.getResource("/Imagens/icons8-voltar-16.png")));
+		btnVoltar.setBounds(276, 239, 89, 23);
+		pnlCadastroCliente.add(btnVoltar);
+		
 		JPanel pnlHistoricoCliente = new JPanel();
 		tabbedPane.addTab("Historico Cliente", (Icon) null, pnlHistoricoCliente, null);
 		pnlHistoricoCliente.setLayout(null);
@@ -278,6 +307,8 @@ public class InterfaceClientes extends JFrame {
 		        String nCelular = modelo.getValueAt(linha, 6).toString();;
 		        String nEndereco = modelo.getValueAt(linha, 7).toString();;
 				
+		       
+
 		        
 		        AlteracaoCliente a = new AlteracaoCliente(nomeCliente, enderecoCliente, cpfCliente, dataNascimento, cepCliente, nResidencial, nCelular, nEndereco);
 				

@@ -10,12 +10,28 @@ import java.util.ArrayList;
 public class CadastroJogos {
     
     private String txtNomeJogo;
-    private String txtCaracteristicas;
-    private String txtValorJogo;
+    private String fabricante;
     private String txtQuantidade;
     private String txtGenero;
+    private String dataLancamento;
     
-    public static ArrayList<CadastroJogos> dadosJogos = new ArrayList<>();
+    public String getFabricante() {
+		return fabricante;
+	}
+
+	public void setFabricante(String fabricante) {
+		this.fabricante = fabricante;
+	}
+
+	public String getDataLancamento() {
+		return dataLancamento;
+	}
+
+	public void setDataLancamento(String dataLancamento) {
+		this.dataLancamento = dataLancamento;
+	}
+
+	public static ArrayList<CadastroJogos> dadosJogos = new ArrayList<>();
 
     /**
      * @return the txtNomeJogo
@@ -34,30 +50,10 @@ public class CadastroJogos {
     /**
      * @return the txtCaracteristicas
      */
-    public String getTxtCaracteristicas() {
-        return txtCaracteristicas;
-    }
-
-    /**
-     * @param txtCaracteristicas the txtCaracteristicas to set
-     */
-    public void setTxtCaracteristicas(String txtCaracteristicas) {
-        this.txtCaracteristicas = txtCaracteristicas;
-    }
+ 
 
     /**
      * @return the txtValorJogo
-     */
-    public String getTxtValorJogo() {
-        return txtValorJogo;
-    }
-
-    /**
-     * @param txtValorJogo the txtValorJogo to set
-     */
-    public void setTxtValorJogo(String txtValorJogo) {
-        this.txtValorJogo = txtValorJogo;
-    }
 
     /**
      * @return the txtQuantidade
